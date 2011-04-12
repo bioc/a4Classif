@@ -1,0 +1,12 @@
+importFrom("a4Core", "topTable")
+importFrom("a4Core", "confusionMatrix")
+importFrom("a4Core", "simulateData")
+
+export(lassoClass, pamClass, rfClass, ROCcurve)
+
+S3method(confusionMatrix, pamClass)
+S3method(print, topTablePam)
+S3method(plot, pamClass)
+S3method(print, topTableRfClass)
+S3method(plot, rfClass)
+
