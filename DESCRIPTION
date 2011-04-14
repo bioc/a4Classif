@@ -10,5 +10,6 @@ Depends: methods, a4Core, a4Preproc, MLInterfaces, ROCR, pamr, glmnet,
   varSelRF
 Imports: a4Core
 Suggests: ALL
+biocViews: Microarray
 License: GPL-3
 
