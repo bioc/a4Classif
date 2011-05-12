@@ -20,6 +20,7 @@ lassoClass(object, groups)
 \author{Willem Talloen}
 \seealso{\code{\link[glmnet]{glmnet}}}
 \examples{
+
 if (require(ALL)){
   data(ALL, package = "ALL")
   ALL <- addGeneInfo(ALL)
@@ -27,8 +28,11 @@ if (require(ALL)){
 
   resultLasso <- lassoClass(object = ALL, groups = "BTtype")
   plot(resultLasso, label = TRUE,
-    main = "Lasso coefficients in relation to degree of penalization.")
+    main = "Lasso coefficients in relation to degree of
+  penalization.")
+\dontrun{
   featResultLasso <- topTable(resultLasso, n = 15)
+}
 }
 }
 \keyword{models}
