@@ -30,9 +30,7 @@ if (require(ALL)){
   plot(resultLasso, label = TRUE,
     main = "Lasso coefficients in relation to degree of
   penalization.")
-\dontrun{
   featResultLasso <- topTable(resultLasso, n = 15)
-}
 }
 }
 \keyword{models}
