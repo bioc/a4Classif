@@ -1,13 +1,8 @@
-# 
-# PAM using package 'pamr'
-#
-###############################################################################
-
 pamClass <- function(object, groups, probe2gene = TRUE){
+  
   labels <- factor(pData(object)[, groups])
   
   gI <- featureNames(object)
-  sI <- labels
   dat <- list(x = as.matrix(exprs(object)), y = labels, geneid = gI)
   
   co <- capture.output(model <- pamr.train(dat))
@@ -17,7 +12,7 @@ pamClass <- function(object, groups, probe2gene = TRUE){
       errors = trunc(modelCV$error * nrow(modelCV$yhat)))
   selectSmallError <- which(matModelCV$errors == min(matModelCV$errors))
   selectSmallErrorFewGenes <- selectSmallError[length(selectSmallError)]
-  Delta <- as.numeric(as.character(matModelCV[selectSmallErrorFewGenes,'threshold']))
+  Delta <- as.numeric(as.character(matModelCV[selectSmallErrorFewGenes, "threshold"]))
   res <- list(pamModel = model, pamCV = modelCV, delta = Delta, exprDat = dat)
   res$featureData <- pData(featureData(object))
   res$probe2gene <- probe2gene
