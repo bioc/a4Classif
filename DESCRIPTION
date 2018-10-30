@@ -1,7 +1,7 @@
 Package: a4Classif
 Type: Package
 Title: Automated Affymetrix Array Analysis Classification Package
-Version: 1.29.0
+Version: 1.30.0
 Date: 2011-05-21
 Author: Willem Talloen, Tobias Verbeke
 Maintainer: Tobias Verbeke <tobias.verbeke@openanalytics.eu>, Willem
