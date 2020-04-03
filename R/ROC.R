@@ -42,6 +42,6 @@ ROCcurve <- function (object, groups, probesetId = NULL,
 	
 	### plot ROC curve (x-axis: fpr, y-axis: tpr)
 	perf <- performance(pred, "tpr", "fpr")
-	plot(perf, avg= "threshold", colorize = TRUE, main = mainTitle, lwd = 3)
+	ROCR::plot(perf, avg= "threshold", colorize = TRUE, main = mainTitle, lwd = 3)
 	invisible(pred)
 }

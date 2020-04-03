@@ -1,11 +1,11 @@
 Package: a4Classif
 Type: Package
 Title: Automated Affymetrix Array Analysis Classification Package
-Version: 1.35.0
-Date: 2011-05-21
+Version: 1.35.1
+Date: 2020-04-03
 Author: Willem Talloen, Tobias Verbeke
-Maintainer: Tobias Verbeke <tobias.verbeke@openanalytics.eu>, Willem
-        Ligtenberg <willem.ligtenberg@openanalytics.eu>
+Maintainer: Tobias Verbeke <tobias.verbeke@openanalytics.eu>, 
+  Laure Cougnaud <laure.cougnaud@openanalytics.eu>
 Description: Automated Affymetrix Array Analysis Classification Package
 Depends: methods, a4Core, a4Preproc, MLInterfaces, ROCR, pamr, glmnet,
         varSelRF
