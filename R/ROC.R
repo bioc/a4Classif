@@ -1,3 +1,35 @@
+#' Receiver operating curve
+#' 
+#' A ROC curve plots the fraction of true positives (TPR = true positive rate)
+#'  versus the fraction of false positives (FPR = false positive rate) for a binary classifier
+#'  when the discrimination threshold is varied. Equivalently, one can also plot
+#'  sensitivity versus (1 - specificity).
+#' @param object ExpressionSet object for the experiment
+#' @param groups String containing the name of the grouping variable. This should be a 
+#' the name of a column in the \code{pData} of the \code{expressionSet} object.
+#' @param probesetId The probeset ID. These should be stored in the \code{featureNames}
+#'  of the \code{expressionSet} object.
+#' @param geneSymbol The gene symbol. These should be stored in the column \code{`Gene Symbol`}
+#'  in the \code{featureData} of the \code{expressionSet} object.
+#' @param main Main title on top of the graph
+#' @param probe2gene Boolean indicating whether the probeset should be translated to a gene symbol
+#'  (used for the default title of the plot)
+#' @param ... Possibility to add extra plot options. See \code{\link{par}}
+#' @return a plot is drawn in the current device.
+#' prediction object is returned invisibly.
+#' @references Some explanation about ROC can be found on 
+#' \url{http://en.wikipedia.org/wiki/ROC_curve}
+#'  and \url{http://www.anaesthetist.com/mnm/stats/roc/Findex.htm}. 
+#' The latter has at the bottom a nice interactive tool 
+#' to scroll the cut-off and to see how it affects the FP/TP table and the ROC curve. 
+#' @author Willem Talloen
+#' @examples 
+#' # simulated data set
+#' esSim <- simulateData()
+#' ROCcurve(probesetId = 'Gene.1', object = esSim, groups = 'type', addLegend = FALSE)
+#' @importFrom Biobase exprs featureData featureNames
+#' @importFrom ROCR prediction performance plot
+#' @export
 ROCcurve <- function (object, groups, probesetId = NULL, 
 		geneSymbol = NULL, main = NULL, probe2gene = TRUE, ...){
 	
@@ -38,10 +70,10 @@ ROCcurve <- function (object, groups, probesetId = NULL,
 				main 
 			}
 	
-	pred <- prediction(predictions = exprGene, labels = labels)
+	pred <- ROCR::prediction(predictions = exprGene, labels = labels)
 	
 	### plot ROC curve (x-axis: fpr, y-axis: tpr)
-	perf <- performance(pred, "tpr", "fpr")
+	perf <- ROCR::performance(pred, "tpr", "fpr")
 	ROCR::plot(perf, avg= "threshold", colorize = TRUE, main = mainTitle, lwd = 3)
 	invisible(pred)
 }

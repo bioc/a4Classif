@@ -1,0 +1,103 @@
+---
+title: "Vignette of the a4Classif package"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_document:
+    toc: true
+    toc_float:
+      collapsed: true
+    number_sections: true
+vignette: >
+  %\VignetteIndexEntry{a4Classif package}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+# Introduction
+
+This document explains the functionalities available in the
+**a4Classif** package.
+
+This package contains for classification of Affymetrix microarray data,
+stored in an `ExpressionSet`.
+This package integrates within the Automated Affymetrix Array Analysis 
+suite of packages.
+
+```{r loadLibraries, results = 'hide', echo = FALSE}
+
+	library(a4Classif)
+	library(ALL)
+
+```
+
+To demonstrate the functionalities of the package, the `ALL`
+dataset is used.
+The genes are annotated thanks to the `addGeneInfo` utility function
+of the `a4Preproc` package.
+
+```{r loadData}
+
+data(ALL, package = "ALL")
+ALL <- addGeneInfo(ALL)
+ALL$BTtype <- as.factor(substr(ALL$BT,0,1))
+
+```
+
+# Classify microarray data
+
+## Lasso regression
+
+```{r lassoClassification}
+
+resultLasso <- lassoClass(object = ALL, groups = "BTtype")
+plot(resultLasso, 
+	label = TRUE, 
+	main = "Lasso coefficients in relation to degree of penalization."
+)
+topTable(resultLasso, n = 15)
+
+```
+
+## PAM regression
+
+```{r pamClassification}
+
+resultPam <- pamClass(object = ALL, groups = "BTtype")
+plot(resultPam, 
+	main = "Pam misclassification error versus number of genes."
+)
+
+topTable(resultPam, n = 15)
+
+confusionMatrix(resultPam)
+
+```
+
+## Random forest
+
+```{r randomForestClassification}
+
+# select only a subset of the data for computation time reason
+ALLSubset <- ALL[sample.int(n = nrow(ALL), size = 100, replace = TRUE), ]
+
+resultRf <- rfClass(object = ALLSubset, groups = "BTtype")
+plot(resultRf)
+topTable(resultRf, n = 15)
+
+```
+
+## ROC curve
+
+```{r rocCurve}
+
+ROCcurve(gene = "ABL1", object = ALL, groups = "BTtype")
+
+```
+
+# Appendix
+
+## Session information
+
+```{r sessionInformation, echo = FALSE}
+print(sessionInfo())
+```
