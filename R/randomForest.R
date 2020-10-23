@@ -44,7 +44,7 @@ rfClass <- function(object, groups, probe2gene = TRUE){
     names(fit$gSymbol) <- featureNames(object)
   }
 
-  class(fit) <- c("rfClass")# , class(fit))
+  class(fit) <- c("rfClass", class(fit))
   return(fit)
 }
 
@@ -66,7 +66,7 @@ setMethod("topTable",
       topList <- data.frame(GeneSymbol=fit$gSymbol[topProbes])
       row.names(topList) <- topProbes 
       res <- list(topList = topList, numberSelGenes = numberSelGenes, n = n)
-      class(res) <- "topTableRfClass"
+      class(res) <- c("topTableRfClass",class(res))
       return(res)      
     }
 )

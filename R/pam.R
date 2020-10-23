@@ -59,7 +59,7 @@ pamClass <- function(object, groups, probe2gene = TRUE){
 #' @export
 confusionMatrix.pamClass <- function(x, ...){
   res <- pamr.confusion(x$pamModel, x$delta, extra = FALSE)
-  class(res) <- "pamClassConfusionTable"
+  class(res) <- c("pamClassConfusionTable", class(res))
   return(res)
 }
 
@@ -94,7 +94,7 @@ setMethod("topTable",
       topList <- listGenes[seq_len(min(n, numberSelGenes)),]
       
       res <- list(topList = topList, numberSelGenes = numberSelGenes, n = n, listGenes = listGenes)
-      class(res) <- "topTablePam"
+      class(res) <- c("topTablePam", class(res))
       return(res)
     }
 )
