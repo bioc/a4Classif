@@ -78,7 +78,7 @@ confusionMatrix(resultPam)
 ```{r randomForestClassification}
 
 # select only a subset of the data for computation time reason
-ALLSubset <- ALL[sample.int(n = nrow(ALL), size = 100, replace = TRUE), ]
+ALLSubset <- ALL[sample.int(n = nrow(ALL), size = 100, replace = FALSE), ]
 
 resultRf <- rfClass(object = ALLSubset, groups = "BTtype")
 plot(resultRf)

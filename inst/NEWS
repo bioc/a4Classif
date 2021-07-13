@@ -1,3 +1,5 @@
+1.41.1
+  o vignette: select subset ALL data without replacement
 1.37.1
   o use Imports rather than Depends + use roxygen2 for documentation
   o use Authors@R
